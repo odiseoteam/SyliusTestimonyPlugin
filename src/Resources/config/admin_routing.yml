@@ -1,0 +1,28 @@
+app_api_testimony:
+  resource: |
+    alias: app.testimony
+    templates: SyliusAdminBundle:Crud
+    except: ['show']
+  prefix: /api/v1
+  type: sylius.resource_api
+
+app_testimony:
+  resource: |
+    alias: app.testimony
+    templates: SyliusAdminBundle:Crud
+    grid: app_admin_testimony
+    except: ['show']
+  prefix: /
+  type: sylius.resource
+
+app_testimony_approve:
+  path: /testimonies/{id}/approve
+  defaults:
+    _controller: app.controller.testimony:applyStateMachineTransitionAction
+    _sylius:
+      csrf_protection: false
+      state_machine:
+        graph: app_testimony
+        transition: publish
+      redirect:
+        route: app_testimony_index

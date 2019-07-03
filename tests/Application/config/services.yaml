@@ -1,0 +1,25 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+imports:
+    - { resource: "@OdiseoSyliusTestimonyPlugin/Resources/config/config.yml" }
+
+parameters:
+    locale: en_US
+
+services:
+    app.listener.admin.menu_builder:
+        class: Odiseo\SyliusTestimonyPlugin\Menu\AdminMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
+
+    app.form.type.testimony:
+        class: Odiseo\SyliusTestimonyPlugin\Form\Type\TestimonyType
+        arguments: ['%app.model.testimony.class%']
+        tags:
+            - { name: form.type, alias: app_testimony }
+
+    app.form.type.testimony_translation:
+        class: Odiseo\SyliusTestimonyPlugin\Form\Type\TestimonyTranslationType
+        arguments: ['%app.model.testimony_translation.class%']
+        tags:
+            - { name: form.type, alias: app_testimony_translation }

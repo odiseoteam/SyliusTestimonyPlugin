@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: Odiseo\SyliusTestimonyPlugin
+        psr4_prefix: Odiseo\SyliusTestimonyPlugin
