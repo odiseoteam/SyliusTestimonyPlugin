@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true" />
-        <!-- Put your Behat services here -->
-
-        <service id="acme_sylius_example.context.ui.shop.welcome" class="Tests\Acme\SyliusExamplePlugin\Behat\Context\Ui\Shop\WelcomeContext">
-            <argument type="service" id="acme_sylius_example.page.shop.static_welcome" />
-            <argument type="service" id="acme_sylius_example.page.shop.dynamic_welcome" />
+        <service id="odiseo_sylius_testimony.context.setup.testimony" class="Tests\Odiseo\SyliusTestimonyPlugin\Behat\Context\Setup\TestimonySetupContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="app.factory.testimony" />
+            <argument type="service" id="app.repository.testimony" />
+            <argument type="service" id="app.manager.testimony" />
         </service>
 
-        <service id="acme_sylius_example.page.shop.static_welcome" class="Tests\Acme\SyliusExamplePlugin\Behat\Page\Shop\StaticWelcomePage" parent="sylius.behat.symfony_page" public="false" />
-        <service id="acme_sylius_example.page.shop.dynamic_welcome" class="Tests\Acme\SyliusExamplePlugin\Behat\Page\Shop\DynamicWelcomePage" parent="sylius.behat.symfony_page" public="false" />
+        <service id="odiseo_sylius_testimony.context.transform.testimony" class="Tests\Odiseo\SyliusTestimonyPlugin\Behat\Context\Transform\TestimonyTransformContext">
+            <argument type="service" id="app.repository.testimony" />
+        </service>
+
+        <service id="odiseo_sylius_testimony.context.ui.admin.managing_testimonies" class="Tests\Odiseo\SyliusTestimonyPlugin\Behat\Context\Ui\ManagingTestimoniesContext">
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="odiseo_sylius_testimony.page.admin.testimony.index_page" />
+            <argument type="service" id="odiseo_sylius_testimony.page.admin.testimony.create_page" />
+        </service>
+
+        <service id="odiseo_sylius_testimony.page.admin.testimony.index_page" class="Tests\Odiseo\SyliusTestimonyPlugin\Behat\Page\Admin\Testimony\IndexPage" parent="sylius.behat.symfony_page" public="false">
+            <argument>app_testimony_index</argument>
+        </service>
+
+        <service id="odiseo_sylius_testimony.page.admin.testimony.create_page" class="Tests\Odiseo\SyliusTestimonyPlugin\Behat\Page\Admin\Testimony\CreatePage" parent="sylius.behat.symfony_page" public="false">
+            <argument>app_testimony_create</argument>
+        </service>
     </services>
 </container>

@@ -1,0 +1,17 @@
+default:
+  suites:
+    ui_managing_testimonies:
+      contexts:
+        - sylius.behat.context.hook.doctrine_orm
+
+        - odiseo_sylius_testimony.context.transform.testimony
+        - sylius.behat.context.transform.shared_storage
+
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.admin_security
+        - odiseo_sylius_testimony.context.setup.testimony
+
+        - odiseo_sylius_testimony.context.ui.admin.managing_testimonies
+        - sylius.behat.context.ui.admin.notification
+      filters:
+        tags: "@managing_testimonies && @ui"
