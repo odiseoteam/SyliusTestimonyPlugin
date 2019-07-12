@@ -5,22 +5,21 @@
     <br />
     Odiseo Sylius Testimony Plugin
     <br />
-    <a href="https://packagist.org/packages/odiseoteam/sylius-report-plugin" title="License" target="_blank">
+    <a href="https://packagist.org/packages/odiseoteam/sylius-testimony-plugin" title="License" target="_blank">
         <img src="https://img.shields.io/packagist/l/odiseoteam/sylius-report-plugin.svg" />
     </a>
-    <a href="https://packagist.org/packages/odiseoteam/sylius-report-plugin" title="Version" target="_blank">
+    <a href="https://packagist.org/packages/odiseoteam/sylius-testimony-plugin" title="Version" target="_blank">
         <img src="https://img.shields.io/packagist/v/odiseoteam/sylius-report-plugin.svg" />
     </a>
-    <a href="http://travis-ci.org/odiseoteam/SyliusReportPlugin" title="Build status" target="_blank">
-        <img src="https://img.shields.io/travis/odiseoteam/SyliusReportPlugin/master.svg" />
+    <a href="http://travis-ci.org/odiseoteam/SyliusTestimonyPlugin" title="Build status" target="_blank">
+        <img src="https://img.shields.io/travis/odiseoteam/SyliusTestimonyPlugin/master.svg" />
     </a>
-    <a href="https://scrutinizer-ci.com/g/odiseoteam/SyliusReportPlugin/" title="Scrutinizer" target="_blank">
-        <img src="https://img.shields.io/scrutinizer/g/odiseoteam/SyliusReportPlugin.svg" />
+    <a href="https://scrutinizer-ci.com/g/odiseoteam/SyliusTestimonyPlugin/" title="Scrutinizer" target="_blank">
+        <img src="https://img.shields.io/scrutinizer/g/odiseoteam/SyliusTestimonyPlugin.svg" />
     </a>
-    <a href="https://packagist.org/packages/odiseoteam/sylius-report-plugin" title="Total Downloads" target="_blank">
-        <img src="https://poser.pugx.org/odiseoteam/sylius-report-plugin/downloads" />
+    <a href="https://packagist.org/packages/odiseoteam/sylius-testimony-plugin" title="Total Downloads" target="_blank">
+        <img src="https://poser.pugx.org/odiseoteam/sylius-testimony-plugin/downloads" />
     </a>
-    <p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="100"></a></p>
 </h1>
 
 ## Description

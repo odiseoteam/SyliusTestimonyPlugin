@@ -1,8 +1,8 @@
 {
-    "name": "odiseo/testimony-plugin",
+    "name": "odiseo/sylius-testimony-plugin",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
-    "description": "Acme example plugin for Sylius.",
+    "description": "This plugin add testimonies model with administration to your Sylius project.",
     "license": "MIT",
     "require": {
         "php": "^7.2",
