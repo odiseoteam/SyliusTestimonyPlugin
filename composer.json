@@ -1,5 +1,5 @@
 {
-    "name": "odiseo/sylius-testimony-plugin",
+    "name": "odiseoteam/sylius-testimony-plugin",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
     "description": "This plugin add testimonies model with administration to your Sylius project.",
