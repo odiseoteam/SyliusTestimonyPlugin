@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Odiseo\SyliusVendorPlugin\Behat\Context\Transform;
+namespace Tests\Odiseo\SyliusTestimonyPlugin\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 class TestimonyTransformContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var EntityRepository
      */
     private $testimonyRepository;
 
@@ -30,7 +31,14 @@ class TestimonyTransformContext implements Context
      */
     public function getTestimonyByTitle($testimonyTitle)
     {
-        $testimony = $this->testimonyRepository->findOneBy(['title' => $testimonyTitle]);
+        $testimony = $this->testimonyRepository->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.title = :title')
+            ->setParameter('title', $testimonyTitle)
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+        ;
 
         Assert::notNull(
             $testimony,

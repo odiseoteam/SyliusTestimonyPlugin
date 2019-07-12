@@ -1,0 +1,8 @@
+odiseo_sylius_testimony:
+    ui:
+        testimonies: Testimonies
+    form:
+        testimony:
+            translations: Translations
+            title: Title
+            description: Description

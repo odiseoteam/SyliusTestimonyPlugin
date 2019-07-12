@@ -1,52 +1,78 @@
+imports:
+    - { resource: "@OdiseoSyliusTestimonyPlugin/Resources/config/services.yml" }
+
 sylius_resource:
-  resources:
-    app.testimony:
-      classes:
-        model: Odiseo\SyliusTestimonyPlugin\Entity\Testimony
-        form: Odiseo\SyliusTestimonyPlugin\Form\Type\TestimonyType
-      translation:
-        classes:
-          model: Odiseo\SyliusTestimonyPlugin\Entity\TestimonyTranslation
+    resources:
+        odiseo_sylius_testimony.testimony:
+            classes:
+                model: Odiseo\SyliusTestimonyPlugin\Entity\Testimony
+                form: Odiseo\SyliusTestimonyPlugin\Form\Type\TestimonyType
+            translation:
+                classes:
+                    model: Odiseo\SyliusTestimonyPlugin\Entity\TestimonyTranslation
 
 sylius_grid:
-  grids:
-    app_admin_testimony:
-      driver:
-        name: doctrine/orm
-        options:
-          class: Odiseo\SyliusTestimonyPlugin\Entity\Testimony
-      limits: [30, 12, 48]
-      fields:
-        title:
-          type: string
-          label: 'Title'
-        description:
-          type: string
-        state:
-          type: string
-      actions:
-        main:
-          create:
-            type: create
-        item:
-          update:
-            type: update
-          delete:
-            type: delete
+    templates:
+        action:
+            testimonyApprove: "@OdiseoSyliusTestimonyPlugin/Grid/Action/testimonyApprove.html.twig"
+    grids:
+        odiseo_sylius_testimony_admin_testimony:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: Odiseo\SyliusTestimonyPlugin\Entity\Testimony
+            limits: [30, 12, 48]
+            fields:
+                title:
+                    type: string
+                    label: 'Title'
+                description:
+                    type: string
+                state:
+                    type: string
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    approve:
+                        type: testimonyApprove
+                        label: Approve
+                        options:
+                            link:
+                                route: odiseo_sylius_testimony_admin_testimony_approve
+                                parameters:
+                                  id: resource.id
+                    update:
+                        type: update
+                    delete:
+                        type: delete
 
 winzou_state_machine:
-  app_testimony:
-    class: Odiseo\SyliusTestimonyPlugin\Entity\Testimony # class of your domain object
-    property_path: state            # property of your object holding the actual state (default is "state")
-    graph: app_testimony                   # name of the graph (default is "default")
-    states:
-      - pending_review
-      - published
-      - rejected
-    transitions:
-      publish:
-        from: [pending_review]
-        to: published
-      reject:
-        from: [pending_review]
-        to: rejected
+    odiseo_sylius_testimony_testimony:
+        class: Odiseo\SyliusTestimonyPlugin\Entity\Testimony
+        property_path: state
+        graph: odiseo_sylius_testimony_testimony
+        states:
+            - pending_review
+            - published
+            - rejected
+        transitions:
+            publish:
+                from: [pending_review]
+                to: published
+            reject:
+                from: [pending_review]
+                to: rejected
+        callbacks:
+            after:
+                email_on_publish:
+                    on:   'publish'
+                    do:   ['@odiseo_sylius_testimony.email_manager', 'sendTestimonyApprovedEmail']
+                    args: ['object']
+
+sylius_mailer:
+  emails:
+    testimony_approved:
+      subject: A new testimony has been approved
+      template: "@OdiseoSyliusTestimonyPlugin/Email/testimony_approved.html.twig"

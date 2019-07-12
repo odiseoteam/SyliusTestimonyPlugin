@@ -18,11 +18,11 @@ final class TestimonyTranslationType extends AbstractResourceType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'sylius.form.product.name',
+                'label' => 'odiseo_sylius_testimony.form.testimony.title',
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-                'label' => 'sylius.form.product.description',
+                'label' => 'odiseo_sylius_testimony.form.testimony.description',
             ])
         ;
     }
@@ -32,6 +32,6 @@ final class TestimonyTranslationType extends AbstractResourceType
      */
     public function getBlockPrefix(): string
     {
-        return 'app_testimony_translation';
+        return 'odiseo_sylius_testimony_testimony_translation';
     }
 }

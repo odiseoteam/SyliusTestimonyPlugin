@@ -1,0 +1,21 @@
+odiseo_sylius_testimony_testimony:
+    resource: |
+        alias: odiseo_sylius_testimony.testimony
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        grid: odiseo_sylius_testimony_admin_testimony
+        except: ['show']
+    prefix: /
+    type: sylius.resource
+
+odiseo_sylius_testimony_admin_testimony_approve:
+    path: /testimonies/{id}/approve
+    defaults:
+        _controller: odiseo_sylius_testimony.controller.testimony:applyStateMachineTransitionAction
+        _sylius:
+            csrf_protection: false
+            state_machine:
+                graph: odiseo_sylius_testimony_testimony
+                transition: publish
+            redirect:
+                route: odiseo_sylius_testimony_admin_testimony_index

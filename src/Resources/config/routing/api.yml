@@ -1,0 +1,8 @@
+odiseo_sylius_testimony_api_testimony:
+    resource: |
+        section: api
+        alias: odiseo_sylius_testimony.testimony
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+    prefix: /
+    type: sylius.resource_api

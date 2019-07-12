@@ -1,1 +1,22 @@
+services:
+    odiseo_sylius_testimony.listener.admin.menu_builder:
+        class: Odiseo\SyliusTestimonyPlugin\Menu\AdminMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
 
+    odiseo_sylius_testimony.email_manager:
+        public: true
+        class: Odiseo\SyliusTestimonyPlugin\EmailManager\EmailManager
+        arguments: ['@sylius.email_sender']
+
+    odiseo_sylius_testimony.form.type.testimony:
+        class: Odiseo\SyliusTestimonyPlugin\Form\Type\TestimonyType
+        arguments: ['%odiseo_sylius_testimony.model.testimony.class%']
+        tags:
+            - { name: form.type, alias: odiseo_sylius_testimony_testimony }
+
+    odiseo_sylius_testimony.form.type.testimony_translation:
+        class: Odiseo\SyliusTestimonyPlugin\Form\Type\TestimonyTranslationType
+        arguments: ['%odiseo_sylius_testimony.model.testimony_translation.class%']
+        tags:
+            - { name: form.type, alias: odiseo_sylius_testimony_testimony_translation }

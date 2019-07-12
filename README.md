@@ -1,88 +1,86 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
+<h1 align="center">
+    <a href="https://odiseo.com.ar/" target="_blank" title="Odiseo">
+        <img src="https://github.com/odiseoteam/SyliusTestimonyPlugin/blob/master/logo_odiseo.png" alt="Odiseo" width="300px" />
     </a>
-</p>
+    <br />
+    Odiseo Sylius Testimony Plugin
+    <br />
+    <a href="https://packagist.org/packages/odiseoteam/sylius-report-plugin" title="License" target="_blank">
+        <img src="https://img.shields.io/packagist/l/odiseoteam/sylius-report-plugin.svg" />
+    </a>
+    <a href="https://packagist.org/packages/odiseoteam/sylius-report-plugin" title="Version" target="_blank">
+        <img src="https://img.shields.io/packagist/v/odiseoteam/sylius-report-plugin.svg" />
+    </a>
+    <a href="http://travis-ci.org/odiseoteam/SyliusReportPlugin" title="Build status" target="_blank">
+        <img src="https://img.shields.io/travis/odiseoteam/SyliusReportPlugin/master.svg" />
+    </a>
+    <a href="https://scrutinizer-ci.com/g/odiseoteam/SyliusReportPlugin/" title="Scrutinizer" target="_blank">
+        <img src="https://img.shields.io/scrutinizer/g/odiseoteam/SyliusReportPlugin.svg" />
+    </a>
+    <a href="https://packagist.org/packages/odiseoteam/sylius-report-plugin" title="Total Downloads" target="_blank">
+        <img src="https://poser.pugx.org/odiseoteam/sylius-report-plugin/downloads" />
+    </a>
+    <p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="100"></a></p>
+</h1>
 
-<h1 align="center">Plugin Skeleton</h1>
+## Description
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
+This plugin add testimonies model with administration to your Sylius project.
+
+## Demo
+
+You can see this plugin in action in our Sylius Demo application.
+
+- Frontend: [sylius-demo.odiseo.com.ar](https://sylius-demo.odiseo.com.ar). 
+- Administration: [sylius-demo.odiseo.com.ar/admin](https://sylius-demo.odiseo.com.ar/admin) with `odiseo: odiseo` credentials.
 
 ## Installation
 
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
+1. Run `composer require odiseoteam/sylius-testimony-plugin`
 
-2. From the plugin skeleton root directory, run the following commands:
+2. Enable the plugin in bundles.php:
 
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && bin/console assets:install public -e test)
-    
-    $ (cd tests/Application && bin/console doctrine:database:create -e test)
-    $ (cd tests/Application && bin/console doctrine:schema:create -e test)
-    ```
+```php
+<?php
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
-
-## Usage
-
-### Running plugin tests
-
-  - PHPUnit
-
-    ```bash
-    $ vendor/bin/phpunit
-    ```
-
-  - PHPSpec
-
-    ```bash
-    $ vendor/bin/phpspec run
-    ```
-
-  - Behat (non-JS scenarios)
-
-    ```bash
-    $ vendor/bin/behat --tags="~@javascript"
-    ```
-
-  - Behat (JS scenarios)
+return [
+    // ...
+    Odiseo\SyliusTestimonyPlugin\OdiseoSyliusTestimonyPlugin::class => ['all' => true],
+    // ...
+];
+```
  
-    1. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)
-    
-    2. Download [Selenium Standalone Server](https://www.seleniumhq.org/download/).
-    
-    2. Run Selenium server with previously downloaded Chromedriver:
-    
-        ```bash
-        $ java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar
-        ```
-        
-    3. Run test application's webserver on `localhost:8080`:
-    
-        ```bash
-        $ (cd tests/Application && bin/console server:run localhost:8080 -d public -e test)
-        ```
-    
-    4. Run Behat:
-    
-        ```bash
-        $ vendor/bin/behat --tags="@javascript"
-        ```
+3. Import the plugin configurations
+ 
+```yml
+imports:
+    - { resource: "@OdiseoSyliusReportPlugin/Resources/config/config.yml" }
+```
 
-### Opening Sylius with your plugin
+4. Add the admin and api routes
 
-- Using `test` environment:
+```yml
+odiseo_sylius_testimony_plugin_admin:
+    resource: "@OdiseoSyliusTestimonyPlugin/Resources/config/routing/admin.yml"
+    prefix: /admin
 
-    ```bash
-    $ (cd tests/Application && bin/console sylius:fixtures:load -e test)
-    $ (cd tests/Application && bin/console server:run -d public -e test)
-    ```
+odiseo_sylius_testimony_plugin_api:
+    resource: "@OdiseoSyliusTestimonyPlugin/Resources/config/routing/api.yml"
+    prefix: /api/v{version}
+```
+
+5. Finish the installation updating the database schema and installing assets
+   
+```
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
+php bin/console sylius:theme:assets:install --symlink
+```
+
+## Test the plugin
+
+You can follow the instructions to test this plugins in the proper documentation page: [Test the plugin](doc/tests.md).
     
-- Using `dev` environment:
+## Credits
 
-    ```bash
-    $ (cd tests/Application && bin/console sylius:fixtures:load -e dev)
-    $ (cd tests/Application && bin/console server:run -d public -e dev)
-    ```
+This plugin is maintained by <a href="https://odiseo.com.ar">Odiseo</a>. Want us to help you with this plugin or any Sylius project? Contact us on <a href="mailto:team@odiseo.com.ar">team@odiseo.com.ar</a>.

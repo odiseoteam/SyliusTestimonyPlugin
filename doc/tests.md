@@ -8,7 +8,6 @@ From the plugin root directory, run the following commands:
 
     $ (cd tests/Application && yarn install)
     $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && yarn run gulp)
     $ (cd tests/Application && bin/console assets:install public -e test)
     
     $ (cd tests/Application && bin/console doctrine:database:create -e test)
@@ -23,19 +22,19 @@ To be able to setup a plugin's database, remember to configure you database cred
   - PHPUnit
 
     ```bash
-    $ bin/phpunit
+    $ vendor/bin/phpunit
     ```
 
   - PHPSpec
 
     ```bash
-    $ bin/phpspec run
+    $ vendor/bin/phpspec run
     ```
 
   - Behat
 
     ```bash
-    $ bin/behat
+    $ vendor/bin/behat
     ```
     
 ### Opening Sylius with this plugin
